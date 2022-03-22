@@ -37,15 +37,37 @@ window.addEventListener('load', (event) => {
       </div>
     `;
   });
-
   // Add all the divs to the HTML
   document.querySelector('#memory-board').innerHTML = html;
+});
 
+
+
+   //let varReturn, varHTML2;
+  
   // Bind the click event of each element to a function
+  
   document.querySelectorAll('.card').forEach((card) => {
-    card.addEventListener('click', () => {
+     card.addEventListener('click', function() {
       // TODO: write some code here
+        memoryGame.cards.forEach((pic) => {
+        if (pic.name === card.name) {
+          varHTML2 += `
+          <div class="card turned" data-card-name="${pic.name}">
+            <div class="back" name="${pic.img}"></div>
+            <div class="front" style="background: url(img/${pic.img}) no-repeat"></div>
+          </div>
+        `;
+        };
+      });
+      document.querySelector('#memory-board').innerHTML = varHTML2;
       console.log(`Card clicked: ${card}`);
+      if (this.pickedCards.length <= 1) {
+        this.pickedCards[0] = card;       
+      }
+      else {
+        this.pickedCards[1] = card;
+      };
     });
   });
-});
+
